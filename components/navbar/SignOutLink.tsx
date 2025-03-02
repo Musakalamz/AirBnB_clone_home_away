@@ -1,7 +1,9 @@
 import React from "react";
 
 function SignOutLink() {
-  return <div></div>;
+  return <div>
+    SignOutLink
+  </div>;
 }
 
 export default SignOutLink;
