@@ -1,9 +1,7 @@
 import React from "react";
 
 function UserIcon() {
-  return <div>
-    
-  </div>;
+  return <div>UserIcon</div>;
 }
 
 export default UserIcon;
