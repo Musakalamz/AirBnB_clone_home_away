@@ -39,6 +39,7 @@
     "react-leaflet": "^4.2.1",
     "react-share": "^5.1.0",
     "recharts": "^2.12.7",
+    "shadcn": "^2.4.0-canary.17",
     "stripe": "^15.8.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
