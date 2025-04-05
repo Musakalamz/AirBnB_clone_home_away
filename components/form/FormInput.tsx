@@ -18,7 +18,7 @@ export default function FormInput({
 }: FormInputProps) {
   return (
     <div className="mb-2">
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>{label || name}</Label>
 
       <Input
         id={name}
