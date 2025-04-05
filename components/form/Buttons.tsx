@@ -9,7 +9,7 @@ type SubmitButtonProps = {
   text?: string;
 };
 
-export default function Buttons({
+export default function SubmitButton({
   className = "",
   text = "submit",
 }: SubmitButtonProps) {
