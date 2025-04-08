@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export async function createProfileAction(prevState: any, formData: FormData) {
   try {
     const user = await currentUser();
-    console.log(user);
+    // console.log(user);
     if (!user) throw new Error("Please login to create a profile");
 
     const rawData = Object.fromEntries(formData);
@@ -36,4 +36,19 @@ export async function createProfileAction(prevState: any, formData: FormData) {
     };
   }
   redirect("/");
+}
+
+export async function fetchProfileImage() {
+  const user = await currentUser();
+  if (!user) return null;
+
+  const profile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      profileImage: true,
+    },
+  });
+  return profile?.profileImage;
 }

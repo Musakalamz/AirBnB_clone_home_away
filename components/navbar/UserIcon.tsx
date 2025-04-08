@@ -1,4 +1,4 @@
-import React from "react";
+import { fetchProfileImage } from "@/utils/actions";
 import { LuUser } from "react-icons/lu";
 
 function UserIcon() {
