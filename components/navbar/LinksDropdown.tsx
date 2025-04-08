@@ -16,8 +16,8 @@ import { auth } from "@clerk/nextjs/server";
 
 function LinksDropdown() {
   const { userId } = auth();
-
   const isAdminUser = userId === process.env.ADMIN_USER_ID;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -53,8 +53,8 @@ function LinksDropdown() {
               </DropdownMenuItem>
             );
           })}
-
           <DropdownMenuSeparator />
+
           <DropdownMenuItem>
             <SignOutLink />
           </DropdownMenuItem>
