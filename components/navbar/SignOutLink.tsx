@@ -1,7 +1,7 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
 import { SignOutButton } from "@clerk/nextjs";
-import { useToast } from "../ui/use-toast";
 
 function SignOutLink() {
   const { toast } = useToast();

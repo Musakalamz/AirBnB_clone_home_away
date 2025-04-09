@@ -2,8 +2,8 @@
 
 // import { useFormState } from "react-dom";
 import { useActionState, useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import { actionFunction } from "@/utils/types";
+import { useToast } from "@/hooks/use-toast";
 
 const initialState = {
   message: "",
