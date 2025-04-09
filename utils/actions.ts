@@ -109,3 +109,10 @@ export async function updateProfileAction(
     return renderError(error);
   }
 }
+
+export async function updateProfileImageAction(
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> {
+  return { message: "Profile image updated successfully" };
+}
