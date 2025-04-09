@@ -6,6 +6,16 @@ import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+// Helper function to get user
+async function getAuthUser() {
+  const user = await currentUser();
+  if (!user) {
+    throw new Error("You must be logged in to access this route");
+  }
+  if (!user.privateMetadata.hasProfile) redirect("/profile/create");
+  return user;
+}
+
 export async function createProfileAction(prevState: any, formData: FormData) {
   try {
     const user = await currentUser();
@@ -51,4 +61,17 @@ export async function fetchProfileImage() {
     },
   });
   return profile?.profileImage;
+}
+
+export async function fetchProfile() {
+  const user = await getAuthUser();
+
+  const profile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  });
+
+  if (!profile) return redirect("/profile/create");
+  return profile;
 }
