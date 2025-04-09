@@ -16,6 +16,14 @@ async function getAuthUser() {
   return user;
 }
 
+// Helper function to render Error messages
+function renderError(error: unknown): { message: string } {
+  console.log(error);
+  return {
+    message: error instanceof Error ? error.message : "An error occurred",
+  };
+}
+
 export async function createProfileAction(prevState: any, formData: FormData) {
   try {
     const user = await currentUser();
@@ -74,4 +82,28 @@ export async function fetchProfile() {
 
   if (!profile) return redirect("/profile/create");
   return profile;
+}
+
+export async function updateProfileAction(
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> {
+  const user = await getAuthUser();
+
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = profileSchema.parse(rawData);
+
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: validatedFields,
+    });
+    revalidatePath("/profile");
+
+    return { message: "Profile updated successfully" };
+  } catch (error) {
+    return renderError(error);
+  }
 }
