@@ -45,6 +45,7 @@ export default function ImageInputContainer(props: ImageInputContainerProps) {
       >
         {text}
       </Button>
+
       {isUpdateFormVisible && (
         <div className="max-w-lg mt-4">
           <FormContainer action={action}>
