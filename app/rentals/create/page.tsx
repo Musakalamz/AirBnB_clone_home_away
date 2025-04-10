@@ -2,6 +2,7 @@ import FormInput from "@/components/form/FormInput";
 import FormContainer from "@/components/form/FormContainer";
 import { createPropertyAction } from "@/utils/actions";
 import SubmitButton from "@/components/form/Buttons";
+import PriceInput from "@/components/form/PriceInput";
 
 export default function page() {
   return (
@@ -26,7 +27,8 @@ export default function page() {
               defaultValue="Dream Getaway Awaits You Here!"
             />
 
-            {/* price */}
+            <PriceInput />
+
             {/* categories */}
           </div>
 
