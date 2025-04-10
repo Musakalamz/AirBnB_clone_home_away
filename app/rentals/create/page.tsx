@@ -3,6 +3,7 @@ import FormContainer from "@/components/form/FormContainer";
 import { createPropertyAction } from "@/utils/actions";
 import SubmitButton from "@/components/form/Buttons";
 import PriceInput from "@/components/form/PriceInput";
+import CategoriesInput from "@/components/form/CategoriesInput";
 
 export default function page() {
   return (
@@ -26,10 +27,8 @@ export default function page() {
               label="Tagline (30 limit)"
               defaultValue="Dream Getaway Awaits You Here!"
             />
-
             <PriceInput />
-
-            {/* categories */}
+            <CategoriesInput />
           </div>
 
           {/* text area / description */}
