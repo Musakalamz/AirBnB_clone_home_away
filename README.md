@@ -2606,8 +2606,8 @@ import Link from "next/link";
 import CountryFlagAndName from "./CountryFlagAndName";
 import PropertyRating from "./PropertyRating";
 import FavoriteToggleButton from "./FavoriteToggleButton";
-import { PropertyCardProps } from "@/utils/types";
 import { formatCurrency } from "@/utils/format";
+import { PropertyCardProps } from "@/utils/types";
 
 function PropertyCard({ property }: { property: PropertyCardProps }) {
   const { name, image, price } = property;
