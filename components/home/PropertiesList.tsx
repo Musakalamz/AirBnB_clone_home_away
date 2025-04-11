@@ -1,5 +1,9 @@
-import React from "react";
+import type { PropertyCardProps } from "@/utils/types";
 
-export default function PropertiesList() {
+export default function PropertiesList({
+  properties,
+}: {
+  properties: PropertyCardProps[];
+}) {
   return <div></div>;
 }
