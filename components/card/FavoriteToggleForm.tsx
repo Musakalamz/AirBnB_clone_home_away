@@ -1,5 +1,11 @@
-import React from "react";
+type FavoriteToggleFormProps = {
+  propertyId: string;
+  favoriteId: string | null;
+};
 
-export default function FavoriteToggleForm() {
+export default function FavoriteToggleForm({
+  propertyId,
+  favoriteId,
+}: FavoriteToggleFormProps) {
   return <div>FavoriteToggleForm</div>;
 }
