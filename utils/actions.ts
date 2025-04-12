@@ -212,6 +212,14 @@ export async function fetchFavoriteId({ propertyId }: { propertyId: string }) {
   return favorite?.id || null;
 }
 
-export async function toggleFavoriteAction() {
+export async function toggleFavoriteAction(prevState: {
+  propertyId: string;
+  favoriteId: string | null;
+  pathname: string;
+}) {
+  const user = await getAuthUser();
+  const { propertyId, favoriteId, pathname } = prevState;
+  console.log(propertyId, favoriteId, pathname);
+
   return { message: "toggle favorite" };
 }
