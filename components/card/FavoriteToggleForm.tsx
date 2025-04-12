@@ -1,3 +1,5 @@
+"use client";
+
 import { usePathname } from "next/navigation";
 import FormContainer from "../form/FormContainer";
 import { toggleFavoriteAction } from "@/utils/actions";
