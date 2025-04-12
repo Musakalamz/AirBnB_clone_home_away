@@ -44,7 +44,7 @@ export default function PropertyCard({
             <span className="font-semibold">{formatCurrency(price)} </span>
             night
           </p>
-          {/* country and flag */}
+          <CountryFlagAndName countryCode={country} />
         </div>
       </Link>
 
