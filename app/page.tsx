@@ -8,18 +8,14 @@ type SearchParamsProps = {
 };
 
 async function HomePage({ searchParams }: SearchParamsProps) {
-  const params = await searchParams;
-  console.log(params);
+  const { category, search } = await searchParams;
 
   return (
     <section>
-      <CategoriesList category={params?.category} search={params?.search} />
+      <CategoriesList category={category} search={search} />
 
       <Suspense fallback={<LoadingCards />}>
-        <PropertiesContainer
-          category={params?.category}
-          search={params?.search}
-        />
+        <PropertiesContainer category={category} search={search} />
       </Suspense>
     </section>
   );
