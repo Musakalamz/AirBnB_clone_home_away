@@ -3,6 +3,7 @@ import PropertyRating from "@/components/card/PropertyRating";
 import BreadCrumbs from "@/components/properties/BreadCrumbs";
 import ImageContainer from "@/components/properties/ImageContainer";
 import ShareButton from "@/components/properties/ShareButton";
+import BookingCalendar from "@/components/properties/booking/BookingCalendar";
 import { fetchPropertyDetails } from "@/utils/actions";
 import { redirect } from "next/navigation";
 
@@ -32,8 +33,9 @@ export default async function page({ params }: { params: { id: string } }) {
             <PropertyRating inPage propertyId={property.id} />
           </div>
         </div>
+
         <div className="lg:col-span-4 flex flex-col items-center">
-          {/* calendar */}
+          <BookingCalendar />
         </div>
       </section>
     </section>
