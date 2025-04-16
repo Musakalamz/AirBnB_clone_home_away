@@ -1,5 +1,6 @@
 import FavoriteToggleButton from "@/components/card/FavoriteToggleButton";
 import PropertyRating from "@/components/card/PropertyRating";
+import Amenities from "@/components/properties/Amenities";
 import BreadCrumbs from "@/components/properties/BreadCrumbs";
 import Description from "@/components/properties/Description";
 import ImageContainer from "@/components/properties/ImageContainer";
@@ -44,6 +45,8 @@ export default async function page({ params }: { params: { id: string } }) {
 
           <Separator className="mt-4" />
           <Description description={property.description} />
+
+          <Amenities amenities={property.amenities} />
         </div>
 
         <div className="lg:col-span-4 flex flex-col items-center">
