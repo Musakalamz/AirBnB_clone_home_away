@@ -38,6 +38,7 @@ export async function createProfileAction(prevState: any, formData: FormData) {
 
     const rawData = Object.fromEntries(formData);
     // const validatedFields = profileSchema.parse(rawData);
+
     const validatedFields = validateWithZodSchema(profileSchema, rawData);
 
     await db.profile.create({
