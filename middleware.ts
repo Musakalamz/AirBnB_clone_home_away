@@ -10,9 +10,10 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware((auth, req) => {
+  if (req.url === "/" || req.url.startsWith("/_next")) return;
   if (isProtectedRoute(req)) auth().protect();
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next|index).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
