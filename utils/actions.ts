@@ -17,7 +17,6 @@ async function getAuthUser() {
   const user = await currentUser();
   if (!user) {
     throw new Error("You must be logged in to access this route");
-    return;
   }
   if (!user.privateMetadata.hasProfile) redirect("/profile/create");
   return user;
@@ -58,9 +57,7 @@ export async function createProfileAction(prevState: any, formData: FormData) {
       },
     });
   } catch (error) {
-    return {
-      message: error instanceof Error ? error.message : "An error occurred",
-    };
+    return renderError(error);
   }
   redirect("/");
 }
@@ -77,6 +74,7 @@ export async function fetchProfileImage() {
       profileImage: true,
     },
   });
+
   return profile?.profileImage;
 }
 
@@ -89,7 +87,7 @@ export async function fetchProfile() {
     },
   });
 
-  if (!profile) return redirect("/profile/create");
+  if (!profile) redirect("/profile/create");
   return profile;
 }
 
@@ -110,8 +108,8 @@ export async function updateProfileAction(
       },
       data: validatedFields,
     });
-    revalidatePath("/profile");
 
+    revalidatePath("/profile");
     return { message: "Profile updated successfully" };
   } catch (error) {
     return renderError(error);
@@ -137,7 +135,6 @@ export async function updateProfileImageAction(
         profileImage: fullPath,
       },
     });
-
     revalidatePath("/profile");
     return { message: "Profile image updated successfully" };
   } catch (error) {
@@ -154,6 +151,7 @@ export async function createPropertyAction(
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get("image") as File;
+    console.log(rawData);
 
     const validatedFields = validateWithZodSchema(propertySchema, rawData);
     const validatedFile = validateWithZodSchema(imageSchema, { image: file });
@@ -192,8 +190,11 @@ export async function fetchProperties({
       name: true,
       tagline: true,
       country: true,
-      image: true,
       price: true,
+      image: true,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
   return properties;
@@ -238,7 +239,6 @@ export async function toggleFavoriteAction(prevState: {
         },
       });
     }
-
     revalidatePath(pathname);
     return { message: favoriteId ? "Removed from Faves" : "Added to Faves" };
   } catch (error) {
@@ -248,6 +248,7 @@ export async function toggleFavoriteAction(prevState: {
 
 export async function fetchFavorites() {
   const user = await getAuthUser();
+
   const favorites = await db.favorite.findMany({
     where: {
       profileId: user.id,
@@ -258,8 +259,8 @@ export async function fetchFavorites() {
           id: true,
           name: true,
           tagline: true,
-          price: true,
           country: true,
+          price: true,
           image: true,
         },
       },
