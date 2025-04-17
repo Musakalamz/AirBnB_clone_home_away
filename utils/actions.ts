@@ -16,6 +16,7 @@ import { uploadImage } from "./supabase";
 async function getAuthUser() {
   const user = await currentUser();
   if (!user) {
+    redirect("/");
     throw new Error("You must be logged in to access this route");
   }
   if (!user.privateMetadata.hasProfile) redirect("/profile/create");
