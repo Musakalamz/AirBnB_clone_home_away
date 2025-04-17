@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "../ui/input";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { useState, useEffect } from "react";
 
@@ -9,7 +9,7 @@ function NavSearch() {
   // accessing searchParams in a client component
   const searchParams = useSearchParams();
   // this get the current URL
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // Programmatic navigation to the homepage
   const { replace } = useRouter();
 
@@ -25,7 +25,7 @@ function NavSearch() {
     } else {
       params.delete("search");
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`/?${params.toString()}`);
   }, 300);
 
   useEffect(() => {
