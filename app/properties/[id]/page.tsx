@@ -13,8 +13,13 @@ import { Separator } from "@/components/ui/separator";
 import { fetchPropertyDetails } from "@/utils/actions";
 import { redirect } from "next/navigation";
 
-export default async function page({ params }: { params: { id: string } }) {
-  const property = await fetchPropertyDetails(params.id);
+type showPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function page({ params }: showPageProps) {
+  const { id } = await params;
+  const property = await fetchPropertyDetails(id);
   if (!property) redirect("/");
 
   const { baths, bedrooms, beds, guests } = property;
