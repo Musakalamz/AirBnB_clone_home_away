@@ -2,6 +2,7 @@ import FavoriteToggleButton from "@/components/card/FavoriteToggleButton";
 import PropertyRating from "@/components/card/PropertyRating";
 import Amenities from "@/components/properties/Amenities";
 import BreadCrumbs from "@/components/properties/BreadCrumbs";
+import DynamicMap from "@/components/properties/PropertyMapProvider";
 import Description from "@/components/properties/Description";
 import ImageContainer from "@/components/properties/ImageContainer";
 import PropertyDetails from "@/components/properties/PropertyDetails";
@@ -42,11 +43,10 @@ export default async function page({ params }: { params: { id: string } }) {
           </div>
           <PropertyDetails details={details} />
           <UserInfo profile={{ firstName, profileImage }} />
-
           <Separator className="mt-4" />
           <Description description={property.description} />
-
           <Amenities amenities={property.amenities} />
+          <DynamicMap countryCode={property.country} />;
         </div>
 
         <div className="lg:col-span-4 flex flex-col items-center">

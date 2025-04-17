@@ -4,7 +4,7 @@ import PropertiesContainer from "@/components/home/PropertiesContainer";
 import { Suspense } from "react";
 
 type SearchParamsProps = {
-  searchParams: { category?: string; search?: string };
+  searchParams: Promise<{ category?: string; search?: string }>;
 };
 
 async function HomePage({ searchParams }: SearchParamsProps) {
