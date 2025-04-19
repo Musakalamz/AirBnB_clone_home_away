@@ -279,3 +279,19 @@ export async function fetchPropertyDetails(id: string) {
     },
   });
 }
+
+export async function createReviewAction() {
+  return { message: "create review" };
+}
+
+export async function fetchPropertyReviews() {
+  return { message: "fetch reviews" };
+}
+
+export async function fetchPropertyReviewsByUser() {
+  return { message: "fetch user reviews" };
+}
+
+export async function deleteReviewAction() {
+  return { message: "delete  reviews" };
+}
