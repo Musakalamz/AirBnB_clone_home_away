@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { fetchPropertyDetails } from "@/utils/actions";
 import { redirect } from "next/navigation";
 import SubmitReview from "@/components/reviews/SubmitReview";
+import PropertyReviews from "@/components/reviews/PropertyReviews";
 
 type showPageProps = {
   params: Promise<{ id: string }>;
@@ -59,6 +60,7 @@ export default async function page({ params }: showPageProps) {
         </div>
       </section>
       <SubmitReview propertyId={property.id} />
+      <PropertyReviews propertyId={property.id} />
     </section>
   );
 }
