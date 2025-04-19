@@ -12,6 +12,7 @@ import BookingCalendar from "@/components/properties/booking/BookingCalendar";
 import { Separator } from "@/components/ui/separator";
 import { fetchPropertyDetails } from "@/utils/actions";
 import { redirect } from "next/navigation";
+import SubmitReview from "@/components/reviews/SubmitReview";
 
 type showPageProps = {
   params: Promise<{ id: string }>;
@@ -39,7 +40,6 @@ export default async function page({ params }: showPageProps) {
         </div>
       </header>
       <ImageContainer mainImage={property.image} name={property.name} />
-
       <section className="lg:grid lg:grid-cols-12 gap-x-12 mt-12">
         <div className="lg:col-span-8">
           <div className="flex gap-x-4 items-center">
@@ -58,6 +58,7 @@ export default async function page({ params }: showPageProps) {
           <BookingCalendar />
         </div>
       </section>
+      <SubmitReview propertyId={property.id} />;
     </section>
   );
 }
