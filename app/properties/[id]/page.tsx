@@ -51,14 +51,14 @@ export default async function page({ params }: showPageProps) {
           <Separator className="mt-4" />
           <Description description={property.description} />
           <Amenities amenities={property.amenities} />
-          <DynamicMap countryCode={property.country} />;
+          <DynamicMap countryCode={property.country} />
         </div>
 
         <div className="lg:col-span-4 flex flex-col items-center">
           <BookingCalendar />
         </div>
       </section>
-      <SubmitReview propertyId={property.id} />;
+      <SubmitReview propertyId={property.id} />
     </section>
   );
 }
