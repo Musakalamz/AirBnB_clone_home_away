@@ -302,8 +302,27 @@ export async function createReviewAction(prevState: any, formData: FormData) {
   }
 }
 
-export async function fetchPropertyReviews() {
-  return { message: "fetch reviews" };
+export async function fetchPropertyReviews(propertyId: string) {
+  const reviews = await db.review.findMany({
+    where: {
+      propertyId,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      profile: {
+        select: {
+          firstName: true,
+          profileImage: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return reviews;
 }
 
 export async function fetchPropertyReviewsByUser() {
