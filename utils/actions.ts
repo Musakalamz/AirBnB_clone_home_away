@@ -388,3 +388,12 @@ export async function fetchPropertyRating(propertyId: string) {
     count: result[0]?._count.rating ?? 0,
   };
 }
+
+export async function findExistingReview(userId: string, propertyId: string) {
+  return db.review.findFirst({
+    where: {
+      profileId: userId,
+      propertyId: propertyId,
+    },
+  });
+}

@@ -10,10 +10,11 @@ import ShareButton from "@/components/properties/ShareButton";
 import UserInfo from "@/components/properties/UserInfo";
 import BookingCalendar from "@/components/properties/booking/BookingCalendar";
 import { Separator } from "@/components/ui/separator";
-import { fetchPropertyDetails } from "@/utils/actions";
+import { fetchPropertyDetails, findExistingReview } from "@/utils/actions";
 import { redirect } from "next/navigation";
 import SubmitReview from "@/components/reviews/SubmitReview";
 import PropertyReviews from "@/components/reviews/PropertyReviews";
+import { auth } from "@clerk/nextjs/server";
 
 type showPageProps = {
   params: Promise<{ id: string }>;
@@ -29,6 +30,11 @@ export default async function page({ params }: showPageProps) {
 
   const firstName = property.profile.firstName;
   const profileImage = property.profile.profileImage;
+
+  const { userId } = auth();
+  const isNotOwner = property.profile.clerkId !== userId;
+  const reviewDoesNotExist =
+    userId && isNotOwner && !(await findExistingReview(userId, property.id));
 
   return (
     <section>
@@ -59,6 +65,9 @@ export default async function page({ params }: showPageProps) {
           <BookingCalendar />
         </div>
       </section>
+
+      {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
+
       <SubmitReview propertyId={property.id} />
       <PropertyReviews propertyId={property.id} />
     </section>
