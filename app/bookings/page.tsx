@@ -47,6 +47,7 @@ export default async function page() {
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
+
         <TableBody>
           {bookings.map((booking) => {
             const { id, orderTotal, totalNights, checkIn, checkOut } = booking;
@@ -63,13 +64,16 @@ export default async function page() {
                     {name}
                   </Link>
                 </TableCell>
+
                 <TableCell>
                   <CountryFlagAndName countryCode={country} />
                 </TableCell>
+
                 <TableCell>{totalNights}</TableCell>
                 <TableCell>{formatCurrency(orderTotal)}</TableCell>
                 <TableCell>{startDate}</TableCell>
                 <TableCell>{endDate}</TableCell>
+
                 <TableCell>
                   <DeleteBooking bookingId={id} />
                 </TableCell>
