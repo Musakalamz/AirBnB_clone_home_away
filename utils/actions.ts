@@ -403,3 +403,7 @@ export async function findExistingReview(userId: string, propertyId: string) {
     },
   });
 }
+
+export async function createBookingAction({}) {
+  return { message: "create booking" };
+}
