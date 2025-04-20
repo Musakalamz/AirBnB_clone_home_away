@@ -67,8 +67,6 @@ export default async function page({ params }: showPageProps) {
       </section>
 
       {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
-
-      <SubmitReview propertyId={property.id} />
       <PropertyReviews propertyId={property.id} />
     </section>
   );
