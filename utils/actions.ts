@@ -277,6 +277,12 @@ export async function fetchPropertyDetails(id: string) {
     },
     include: {
       profile: true,
+      bookings: {
+        select: {
+          checkIn: true,
+          checkOut: true,
+        },
+      },
     },
   });
 }
