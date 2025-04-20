@@ -14,6 +14,7 @@ import { redirect } from "next/navigation";
 import SubmitReview from "@/components/reviews/SubmitReview";
 import PropertyReviews from "@/components/reviews/PropertyReviews";
 import { auth } from "@clerk/nextjs/server";
+import DynamicBookingWrapper from "@/components/booking/BookingCalendarProvider";
 
 type showPageProps = {
   params: Promise<{ id: string }>;
@@ -60,7 +61,13 @@ export default async function page({ params }: showPageProps) {
           <DynamicMap countryCode={property.country} />
         </div>
 
-        <div className="lg:col-span-4 flex flex-col items-center"></div>
+        <div className="lg:col-span-4 flex flex-col items-center">
+          <DynamicBookingWrapper
+            propertyId={property.id}
+            price={property.price}
+            bookings={property.bookings}
+          />
+        </div>
       </section>
 
       {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
