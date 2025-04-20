@@ -2,10 +2,9 @@
 
 import { Calendar } from "@/components/ui/calendar";
 import { useEffect, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import { DateRange } from "react-day-picker";
 import { useProperty } from "@/utils/store";
-
+import { useToast } from "@/hooks/use-toast";
 import {
   generateDisabledDates,
   generateDateRange,
@@ -14,6 +13,7 @@ import {
 } from "@/utils/calendar";
 
 export default function BookingCalendar() {
+  const { toast } = useToast();
   const currentDate = new Date();
 
   const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
@@ -23,7 +23,20 @@ export default function BookingCalendar() {
     today: currentDate,
   });
 
+  const unavailableDates = generateDisabledDates(blockedPeriods);
+
   useEffect(() => {
+    const selectedRange = generateDateRange(range);
+    const isDisabledDateIncluded = selectedRange.some((date) => {
+      if (unavailableDates[date]) {
+        setRange(defaultSelected);
+        toast({
+          description: "Some dates are booked. Please select again.",
+        });
+        return true;
+      }
+      return false;
+    });
     useProperty.setState({ range });
   }, [range]);
 
