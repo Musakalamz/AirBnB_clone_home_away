@@ -4,7 +4,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useProperty } from "@/utils/store";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import {
   generateDisabledDates,
   generateDateRange,
