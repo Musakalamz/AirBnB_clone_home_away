@@ -9,6 +9,7 @@ export default function AmenitiesInput({
 }: {
   defaultValue?: Amenity[];
 }) {
+  // This line below iis used to find amenities(inc its icons) which haven't been saved into the database
   const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => ({
     name,
     selected,
@@ -19,7 +20,7 @@ export default function AmenitiesInput({
     amenitiesWithIcons || amenities
   );
 
-  const handleChange = (amenity: Amenity) => {
+  function handleChange(amenity: Amenity) {
     setSelectedAmenities((prev) => {
       return prev.map((a) => {
         if (a.name === amenity.name) {
@@ -28,7 +29,7 @@ export default function AmenitiesInput({
         return a;
       });
     });
-  };
+  }
 
   return (
     <section>

@@ -27,6 +27,8 @@ import {
   FiTv,
 } from "react-icons/fi";
 
+// we stringify this, when we run JSON.Stringify, we only stringify PRIMITIVE values. which means we are only saving the NAME and SELECTED below to the database.
+
 export const amenities: Amenity[] = [
   { name: "unlimited cloud storage", icon: FiCloud, selected: false },
   { name: "VIP parking for squirrels", icon: FiTruck, selected: false },

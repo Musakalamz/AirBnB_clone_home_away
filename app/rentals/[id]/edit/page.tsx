@@ -26,6 +26,7 @@ async function EditRentalPage({ params }: RentalsEditPageProps) {
 
   if (!property) redirect("/");
 
+  //   since the amenities were saved as string, we turn it back to an array using JSON.Parse
   const defaultAmenities: Amenity[] = JSON.parse(property.amenities);
 
   return (
