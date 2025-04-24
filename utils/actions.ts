@@ -24,6 +24,12 @@ async function getAuthUser() {
   return user;
 }
 
+async function getAdminUser() {
+  const user = await getAuthUser();
+  if (user.id !== process.env.ADMIN_USER_ID) redirect("/");
+  return user;
+}
+
 // Helper function to render Error messages
 function renderError(error: unknown): { message: string } {
   console.log(error);
@@ -642,4 +648,18 @@ export async function fetchReservations() {
     },
   });
   return reservations;
+}
+
+export async function fetchStats() {
+  await getAdminUser();
+
+  const usersCount = await db.profile.count();
+  const propertiesCount = await db.property.count();
+  const bookingsCount = await db.booking.count();
+
+  return {
+    usersCount,
+    propertiesCount,
+    bookingsCount,
+  };
 }
