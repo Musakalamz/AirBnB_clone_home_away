@@ -614,3 +614,32 @@ export async function updatePropertyImageAction(
     return renderError(error);
   }
 }
+
+export async function fetchReservations() {
+  const user = await getAuthUser();
+
+  // Looking for bookings where property profile Id matches userId, properties owned by the specific user.
+  const reservations = await db.booking.findMany({
+    where: {
+      property: {
+        profileId: user.id,
+      },
+    },
+
+    orderBy: {
+      createdAt: "desc", // or 'asc' for ascending order
+    },
+
+    include: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          country: true,
+        },
+      }, // include property details in the result
+    },
+  });
+  return reservations;
+}
