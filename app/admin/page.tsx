@@ -7,13 +7,15 @@ import {
 import { Suspense } from "react";
 
 export default async function page() {
-  <>
-    <Suspense fallback={<StatsLoadingContainer />}>
-      <StatsContainer />
-    </Suspense>
+  return (
+    <>
+      <Suspense fallback={<StatsLoadingContainer />}>
+        <StatsContainer />
+      </Suspense>
 
-    <Suspense fallback={<ChartsLoadingContainer />}>
-      <ChartsContainer />
-    </Suspense>
-  </>;
+      <Suspense fallback={<ChartsLoadingContainer />}>
+        <ChartsContainer />
+      </Suspense>
+    </>
+  );
 }

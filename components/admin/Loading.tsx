@@ -12,11 +12,13 @@ function LoadingCard() {
 }
 
 export function StatsLoadingContainer() {
-  <div className="mt-8 grid md:grid-cols-2 gap-4 lg:grid-cols-3">
-    <LoadingCard />
-    <LoadingCard />
-    <LoadingCard />
-  </div>;
+  return (
+    <div className="mt-8 grid md:grid-cols-2 gap-4 lg:grid-cols-3">
+      <LoadingCard />
+      <LoadingCard />
+      <LoadingCard />
+    </div>
+  );
 }
 
 export function ChartsLoadingContainer() {
