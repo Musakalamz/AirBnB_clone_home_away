@@ -11,14 +11,14 @@ function LoadingCard() {
   );
 }
 
-export function ChartsLoadingContainer() {
-  return <Skeleton className="mt-16 w-full h-[300px] rounded" />;
-}
-
 export function StatsLoadingContainer() {
   <div className="mt-8 grid md:grid-cols-2 gap-4 lg:grid-cols-3">
     <LoadingCard />
     <LoadingCard />
     <LoadingCard />
   </div>;
+}
+
+export function ChartsLoadingContainer() {
+  return <Skeleton className="mt-16 w-full h-[300px] rounded" />;
 }
