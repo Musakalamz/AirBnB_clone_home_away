@@ -418,6 +418,13 @@ export async function createBookingAction(prevState: {
   checkOut: Date;
 }) {
   const user = await getAuthUser();
+  await db.booking.deleteMany({
+    where: {
+      profileId: user.id,
+      paymentStatus: false,
+    },
+  });
+
   let bookingId: null | string = null;
   const { propertyId, checkIn, checkOut } = prevState;
 
@@ -458,6 +465,7 @@ export async function fetchBookings() {
   const bookings = await db.booking.findMany({
     where: {
       profileId: user.id,
+      paymentStatus: true,
     },
     include: {
       property: {
@@ -512,6 +520,7 @@ export async function fetchRentals() {
       const totalNightsSum = await db.booking.aggregate({
         where: {
           propertyId: rental.id,
+          paymentStatus: true,
         },
         _sum: {
           totalNights: true,
@@ -630,6 +639,7 @@ export async function fetchReservations() {
   // Looking for bookings where property profile Id matches userId, properties owned by the specific user.
   const reservations = await db.booking.findMany({
     where: {
+      paymentStatus: true,
       property: {
         profileId: user.id,
       },
@@ -658,7 +668,11 @@ export async function fetchStats() {
 
   const usersCount = await db.profile.count();
   const propertiesCount = await db.property.count();
-  const bookingsCount = await db.booking.count();
+  const bookingsCount = await db.booking.count({
+    where: {
+      paymentStatus: true,
+    },
+  });
 
   return {
     usersCount,
@@ -675,6 +689,7 @@ export async function fetchChartsData() {
 
   const bookings = await db.booking.findMany({
     where: {
+      paymentStatus: true,
       createdAt: {
         gte: sixMonthsAgo,
       },
