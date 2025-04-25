@@ -713,7 +713,7 @@ export async function fetchChartsData() {
   return bookingsPerMonth;
 }
 
-export const fetchReservationStats = async () => {
+export async function fetchReservationStats() {
   const user = await getAuthUser();
   const properties = await db.property.count({
     where: {
@@ -738,4 +738,4 @@ export const fetchReservationStats = async () => {
     nights: totals._sum.totalNights || 0,
     amount: totals._sum.orderTotal || 0,
   };
-};
+}

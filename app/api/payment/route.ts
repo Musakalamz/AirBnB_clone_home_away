@@ -5,7 +5,7 @@ import { formatDate } from "@/utils/format";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   const origin = requestHeaders.get("origin");
 
