@@ -3,6 +3,7 @@ import Link from "next/link";
 import EmptyList from "@/components/home/EmptyList";
 import CountryFlagAndName from "@/components/card/CountryFlagAndName";
 import { formatDate, formatCurrency } from "@/utils/format";
+import Stats from "@/components/reservations/Stats";
 import {
   Table,
   TableBody,
@@ -67,6 +68,8 @@ export default async function page() {
           })}
         </TableBody>
       </Table>
+
+      <Stats />
     </div>
   );
 }
