@@ -1,14 +1,13 @@
 import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+
 import { type NextRequest, type NextResponse } from "next/server";
 import db from "@/utils/db";
 import { formatDate } from "@/utils/format";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest, res: NextResponse) => {
   const requestHeaders = new Headers(req.headers);
   const origin = requestHeaders.get("origin");
-
   const { bookingId } = await req.json();
 
   const booking = await db.booking.findUnique({
@@ -22,14 +21,12 @@ export async function POST(req: NextRequest) {
       },
     },
   });
-
   if (!booking) {
     return Response.json(null, {
       status: 404,
       statusText: "Not Found",
     });
   }
-
   const {
     totalNights,
     orderTotal,
@@ -44,12 +41,9 @@ export async function POST(req: NextRequest) {
       metadata: { bookingId: booking.id },
       line_items: [
         {
-          // Provide the exact Price ID (for example, pr_1234) of
-          // the product you want to sell
           quantity: 1,
           price_data: {
             currency: "usd",
-
             product_data: {
               name: `${name}`,
               images: [image],
@@ -64,14 +58,12 @@ export async function POST(req: NextRequest) {
       mode: "payment",
       return_url: `${origin}/api/confirm?session_id={CHECKOUT_SESSION_ID}`,
     });
-
     return Response.json({ clientSecret: session.client_secret });
   } catch (error) {
     console.log(error);
-
     return Response.json(null, {
       status: 500,
       statusText: "Internal Server Error",
     });
   }
-}
+};
